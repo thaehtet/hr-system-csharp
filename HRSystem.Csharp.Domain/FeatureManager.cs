@@ -24,7 +24,7 @@ namespace HRSystem.Csharp.Domain
         {
             builder.Services.AddDbContext<AppDbContext>(opt =>
             {
-                opt.UseSqlServer(builder.Configuration.GetConnectionString("DbConnection"));
+                opt.UseSqlServer(builder.Configuration.GetConnectionString("LocalDbConnection"));//DbConnection
             }, ServiceLifetime.Transient, ServiceLifetime.Transient);
             
             builder.AddServices();
