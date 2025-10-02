@@ -10,12 +10,14 @@ namespace HRSystem.Csharp.Domain
             #region User Management BL
 
             builder.Services.AddScoped<BL_Role>();
+            builder.Services.AddScoped<BL_Employee>();
 
             #endregion
 
             #region User Management DA
 
             builder.Services.AddScoped<DA_Role>();
+            builder.Services.AddScoped<DA_Employee>();
 
             #endregion
         }

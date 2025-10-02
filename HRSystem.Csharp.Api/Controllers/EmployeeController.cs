@@ -1,5 +1,5 @@
-﻿using HRSystem.Csharp.Database.AppDbContextModels;
-using HRSystem.Csharp.Domain.Features;
+﻿using HRSystem.Csharp.Domain.Features;
+using HRSystem.Csharp.Domain.Models.Employee;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HRSystem.Csharp.Api.Controllers
@@ -13,10 +13,22 @@ namespace HRSystem.Csharp.Api.Controllers
         {
             _blEmployee = blEmployee;
         }
-        [HttpGet("GetAllRoles")]
-        public IActionResult GetAllRoles()
+
+        [HttpGet("get-all-employee")]
+        public async Task<IActionResult> GetAllEmployees()
         {
-            var result = _blEmployee.GetAllEmployees();
+            var result = await _blEmployee.GetAllEmployees();
+            if (result.IsSuccess)
+            {
+                return Ok(result.Data);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpPost("create-employee")]
+        public async Task<IActionResult> CreateEmployee([FromBody]EmployeeRequestModel emp)
+        {
+            var result = await _blEmployee.CreateEmployee(emp);
             if (result.IsSuccess)
             {
                 return Ok(result.Data);
